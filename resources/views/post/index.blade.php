@@ -1,7 +1,7 @@
 @php
     /** @var Illuminate\Pagination\LengthAwarePaginator */
 @endphp
-<x-app-layout meta-description="Fan personal Blog">
+<x-app-layout :meta-title="'Fan Blog - ' .$category->title" meta-description="By Category">
     <!-- Posts Section -->
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 

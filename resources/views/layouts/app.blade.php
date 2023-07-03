@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Blog Template</title>
-    <meta name="author" content="David Grzyb">
-    <meta name="description" content="">
+    <title>{{ $metaTitle ?: 'Fan Blog'}} </title>
+    <meta name="author" content="Fan">
+    <meta name="description" content="{{ $metaDescription }}">
 
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -16,6 +16,15 @@
         .font-family-karla {
             font-family: karla;
         }
+
+        pre {
+            padding: 1rem;
+            background-color: #1a202c;
+            color: white;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
     </style>
 
     <!-- AlpineJS -->
@@ -23,12 +32,12 @@
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 </head>
-<body class="bg-white font-family-karla">
+<body class="bg-gray-50 font-family-karla">
 
     <!-- Text Header -->
     <header class="w-full container mx-auto">
         <div class="flex flex-col items-center py-12">
-            <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
+            <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="{{route('home')}}">
                 Minimal Blog
             </a>
             <p class="text-lg text-gray-600">
@@ -56,7 +65,7 @@
                     <a href="{{route('by-category', $category)}}" class="hover:bg-blue-600 hover:text-white rounded py-2 px-4 mx-2">{{$category->title}} </a>
                 @endforeach
 
-                <a href="#" class="hover:bg-blue-600 hover:text-white rounded py-2 px-4 mx-2">About Us</a>
+                <a href="{{route('about')}}" class="hover:bg-blue-600 hover:text-white rounded py-2 px-4 mx-2">About Us</a>
             </div>
         </div>
     </nav>
