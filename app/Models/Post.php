@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -43,9 +44,9 @@ class Post extends Model
         return $this->published_at->format('F jS Y');
     }
 
-    public function shortBody(): string
+    public function shortBody($short = 30): string
     {
-        return Str::words(strip_tags($this->body), 30);
+        return Str::words(strip_tags($this->body), $short);
     }
 
     public function getThumbnail()
@@ -54,5 +55,18 @@ class Post extends Model
             return $this->thumbnail;
         }
         return '/storage/'.$this->thumbnail;
+    }
+
+    public function humanReadTime(): Attribute
+    {
+        return new Attribute(
+            get: function($value, $attributes){
+                $words = Str::wordCount(strip_tags($attributes['body']));
+                $minutes = ceil($words/200);
+
+                return $minutes. ' '.str('min')->plural($minutes) . ', '
+                    . $words. ' '.str('words')->plural($words);
+            }
+        );
     }
 }
